@@ -1,0 +1,207 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+
+public interface Som {
+
+    void emitirSom();
+   }
+
+
+public abstract class Animal {
+  private String nome;
+
+  public Animal (String nome){
+    this.nome = nome;
+    }
+
+	public String getNome (){
+		return nome;
+}
+	public void setNome (String nome){
+		this.nome = nome;
+}
+
+
+
+  public String toString() {
+  return "Animal";
+  }
+
+  public abstract String atributos();
+}
+
+
+public class Cachorro extends Animal implements Som {
+  private String raça;
+
+  public Cachorro (String nome, String raça){
+    super (nome);
+
+    this.raça = raça;
+  }
+
+	public String getRaça (){
+		return raça;
+}
+
+  public void emitirSom(){
+
+    System.out.println ("Au au");
+  }
+
+  public String toString() {
+  return "Cachorro";
+  }
+
+  public String atributos() {
+    return "Nome:" + getNome()  + "Raça" + getRaça();
+    }  
+
+}
+
+public class Gato extends Animal implements Som {
+  private String pelagem;
+
+  public Gato (String nome, String pelagem){
+    super (nome);
+    this.pelagem = pelagem;
+  }
+
+	public String getPelagem (){
+		return pelagem;
+	}
+
+
+  public void emitirSom(){
+
+    System.out.println ("Miau miau");
+  }
+
+  public String toString() {
+  return "Gato";
+  }
+
+  public String atributos() {
+  return "Nome:" + getNome() +  "Pelagem" + getPelagem();
+
+}
+}
+
+public class Passaro extends Animal implements Som {
+  private String pena;
+
+  public Passaro (String nome, String pena){
+    super (nome);
+
+    this.pena = pena;
+  }
+
+	public String getPena (){
+		return pena;
+}
+
+  public void emitirSom() {
+    System.out.println ("Piu piu");
+  }
+
+  public String toString() {
+  return "Passaro";
+  }
+
+  public String atributos() {
+  return "Nome:" + getNome()  +  "Pena" + getPena();
+
+}
+}
+
+public class Peixe extends Animal {
+  private String agua;
+
+  public Peixe (String nome, String agua){
+    super (nome);
+
+    this.agua = agua;
+  }
+
+public String getAgua (){
+	return agua;
+}
+
+public String toString() {
+  return "Peixe";
+  }
+
+  public String atributos() {
+  return "Nome:" + getNome()   + "Tipo de água" + getAgua();
+}
+}
+
+
+
+
+public class Loja {
+  private final int quantidade = 10;
+  private List<Animal> animais;
+
+  public Loja() {
+
+    this.animais = new ArrayList<>();
+  }
+
+  public void adicionar(Animal animal){
+    if (animais.size() >= quantidade){
+      System.out.println ("Quantidade máxima atingida");
+    }else{
+      animais.add(animal);
+    }
+  }
+
+  public void remover (Animal animal) {
+    if (animais.size() == 0){
+      System.out.println ("Não há animais");
+    }else {
+    animais.remove(animal);
+    }
+  }
+
+
+public void imprimirAnimais (){
+	for (Animal animal : animais){
+		System.out.println (animal.toString() + "-" +animal.atributos());
+}
+}
+
+public void emitirSons (){
+	for (Animal animal : animais){
+	if (animal instanceof Som){
+		((Som)animal).emitirSom();
+}
+}
+}
+}
+
+
+public class Teste {
+
+public static void main (String[] args) {
+
+	Loja loja = new Loja ();
+
+	Cachorro cachorro = new Cachorro ("Eli","Pitbull");
+	Gato gato = new Gato ("Amora", "Preta");
+	Passaro passaro = new Passaro ("Amanda", "Grande");
+	Peixe peixe = new Peixe ("Olivia", "Salgada");
+
+	loja.adicionar(gato);
+	loja.adicionar(cachorro);
+	loja.adicionar(passaro);
+	loja.adicionar(peixe);
+
+	loja.imprimirAnimais();
+	loja.emitirSons();
+
+}
+}
